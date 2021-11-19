@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application version="7" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/application_7.xsd">
+  <display-name>keti_sys</display-name>
+  <module>
+    <web>
+      <web-uri>keti_sys-war.war</web-uri>
+      <context-root>/</context-root>
+    </web>
+  </module>
+  <module>
+    <ejb>keti_sys-ejb.jar</ejb>
+  </module>
+</application>
