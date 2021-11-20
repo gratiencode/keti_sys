@@ -31,6 +31,8 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(jaxrs.AuthResource.class);
         resources.add(jaxrs.AuthsResource.class);
+        resources.add(jaxrs.ClientResource.class);
+        resources.add(jaxrs.ClientsResource.class);
         resources.add(jaxrs.CorsFilter.class);
         resources.add(jaxrs.RequestInterceptorFilter.class);
         resources.add(jaxrs.SuccursalResource.class);
