@@ -29,17 +29,15 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(jaxrs.AuthResource.class);
         resources.add(jaxrs.AuthsResource.class);
-        resources.add(jaxrs.ClientResource.class);
         resources.add(jaxrs.ClientsResource.class);
         resources.add(jaxrs.CorsFilter.class);
         resources.add(jaxrs.NotifyResource.class);
         resources.add(jaxrs.RequestInterceptorFilter.class);
-        resources.add(jaxrs.SuccursalResource.class);
         resources.add(jaxrs.SuccursalsResource.class);
-        resources.add(jaxrs.UserResource.class);
         resources.add(jaxrs.UsersResource.class);
+        resources.add(jaxrs.VehiculeResource.class);
+        resources.add(jaxrs.VehiculesResource.class);
     }
     
 }

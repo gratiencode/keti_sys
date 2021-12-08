@@ -7,6 +7,7 @@ package jaxrs;
 
 import entities.Succursale;
 import entities.User;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -78,11 +79,29 @@ public class SuccursalsResource {
         return Response.ok(s).build();
     }
 
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/sync")
+    public Response sync(List<Succursale> sucs) {
+        List<Succursale> rst = new ArrayList<>();
+        for (Succursale suc : sucs) {
+            Succursale s=null;
+            if (sbn.findSuccursale(suc.getUid()) == null) {
+                s = sbn.createSuccursale(suc);
+            } else {
+                s = sbn.updateSuccursale(s);
+            }
+            rst.add(s);
+        }
+        return Response.ok(rst).build();
+    }
+
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/list")
-    @Secured({Role.Administrator,Role.Associe,Role.Directeur,Role.Comptable})
-    public List<Succursale> getJson() {        
+    @Secured({Role.Administrator, Role.Associe, Role.Directeur, Role.Comptable})
+    public List<Succursale> getJson() {
         return sbn.findSuccursales();
     }
 
@@ -91,6 +110,6 @@ public class SuccursalsResource {
      */
     @Path("{uid}")
     public SuccursalResource getSuccursalResource(@PathParam("uid") String uid) {
-        return SuccursalResource.getInstance(uid,sbn);
+        return SuccursalResource.getInstance(uid, sbn);
     }
 }

@@ -21,9 +21,10 @@ import javax.persistence.Query;
 @Stateless
 @LocalBean
 public class SuccursaleBean {
-@PersistenceContext(unitName="keti_sys-ejbPU")
+
+    @PersistenceContext(unitName = "keti_sys-ejbPU")
     EntityManager em;
-    
+
     public Succursale createSuccursale(Succursale m) {
         this.em.persist(m);
         return m;
@@ -48,17 +49,17 @@ public class SuccursaleBean {
 
     public Succursale findSuccursales(String directeur) {
         try {
-            Query q=em.createNamedQuery("Succursale.findByDirecteur")
-                    .setParameter("directeur",directeur);
+            Query q = em.createNamedQuery("Succursale.findByDirecteur")
+                    .setParameter("directeur", directeur);
             return (Succursale) q.getSingleResult();
         } catch (NoResultException e) {
             return null;
         }
     }
-    
-     public List<Succursale> findSuccursales() {
+
+    public List<Succursale> findSuccursales() {
         try {
-            Query q=em.createNamedQuery("Succursale.findAll");
+            Query q = em.createNamedQuery("Succursale.findAll");
             return q.getResultList();
         } catch (NoResultException e) {
             return null;
