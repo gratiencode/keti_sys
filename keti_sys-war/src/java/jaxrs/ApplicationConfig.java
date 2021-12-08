@@ -34,6 +34,7 @@ public class ApplicationConfig extends Application {
         resources.add(jaxrs.ClientResource.class);
         resources.add(jaxrs.ClientsResource.class);
         resources.add(jaxrs.CorsFilter.class);
+        resources.add(jaxrs.NotifyResource.class);
         resources.add(jaxrs.RequestInterceptorFilter.class);
         resources.add(jaxrs.SuccursalResource.class);
         resources.add(jaxrs.SuccursalsResource.class);

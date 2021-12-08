@@ -49,6 +49,9 @@ public class Marchandise implements Serializable {
     @Size(max = 255)
     @Column(name = "description")
     private String description;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "prix")
+    private Double prix;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -130,15 +133,20 @@ public class Marchandise implements Serializable {
         return "entities.Marchandise[ uid=" + uid + " ]";
     }
 
-
-   
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Double prix) {
+        this.prix = prix;
     }
     
 }
