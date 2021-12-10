@@ -7,6 +7,7 @@ public enum Role {
     Comptable,
     Directeur,
     Associe,
+    Caissier,
     Administrator;
     
 

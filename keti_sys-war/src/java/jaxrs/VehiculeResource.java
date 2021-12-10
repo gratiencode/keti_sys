@@ -9,7 +9,6 @@ import entities.Vehicule;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.PATCH;
 import javax.ws.rs.Path;
@@ -66,6 +65,8 @@ public class VehiculeResource {
     @Path("update")
     @PATCH
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Secured({Role.Administrator,Role.Associe,Role.Directeur,Role.Comptable})
     public Response putJson(Vehicule content) {
         v.setMarque(content.getMarque());
         v.setModeleVehicule(content.getModeleVehicule());
@@ -80,6 +81,8 @@ public class VehiculeResource {
      * DELETE method for resource VehiculeResource
      */
     @DELETE
+    @Secured({Role.Administrator,Role.Associe,Role.Directeur})
+    @Path("/delete")
     public void delete() {
         vb.deleteVehicule(v);
     }

@@ -50,6 +50,7 @@ public class VehiculesResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Secured({Role.Administrator, Role.Associe, Role.Comptable, Role.Directeur})
+    @Path("/list")
     public List<Vehicule> getJsons() {
         return vb.findVehicules();
     }
@@ -67,8 +68,9 @@ public class VehiculesResource {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    @Secured({Role.Administrator, Role.Associe, Role.Comptable, Role.Directeur})
     @Path("sync")
+    @Secured({Role.Administrator, Role.Associe, Role.Directeur, Role.Comptable,Role.Caissier})
+    
     public Response synch(List<Vehicule> vs) {
         List<Vehicule> vhs = new ArrayList<>();
         for (Vehicule v : vs) {

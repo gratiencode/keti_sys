@@ -15,11 +15,13 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.container.ResourceContext;
@@ -48,7 +50,6 @@ public class SuccursalsResource {
     @Inject
     @AuthenticatedUser
     User user;
-    private Notifier notifier;
 
     @Context
     ResourceContext contextx;
@@ -74,15 +75,29 @@ public class SuccursalsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/save/point")
+    @Secured({Role.Administrator, Role.Associe, Role.Directeur, Role.Comptable})
     public Response saveJson(Succursale suc) {
         Succursale s = sbn.createSuccursale(suc);
         return Response.ok(s).build();
+    }
+    
+    @PATCH
+    @Produces("application/json")
+    @Consumes("application/json")
+    @Path("/group/delete")
+    @Secured({Role.Administrator, Role.Associe})
+    public Response groupDelete(List<Succursale> gdl){
+        for(Succursale s:gdl){
+            sbn.deleteSuccursale(s);
+        }
+        return Response.ok(gdl).build();
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/sync")
+    @Secured({Role.Administrator, Role.Associe, Role.Directeur, Role.Comptable,Role.Caissier})
     public Response sync(List<Succursale> sucs) {
         List<Succursale> rst = new ArrayList<>();
         for (Succursale suc : sucs) {
