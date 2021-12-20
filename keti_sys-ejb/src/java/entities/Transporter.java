@@ -5,6 +5,7 @@
  */
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -76,6 +77,10 @@ public class Transporter implements Serializable {
     @NotNull
     @Column(name = "date_transport")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(
+        shape = JsonFormat.Shape.STRING,
+        pattern = "yyyy-MM-dd'T'HH:mm:ss"
+    )
     private Date dateTransport;
     @Lob
     @Column(name = "photo")

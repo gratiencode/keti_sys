@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
@@ -41,15 +42,6 @@ import org.eclipse.persistence.annotations.UuidGenerator;
     , @NamedQuery(name = "Succursale.findByDirecteur", query = "SELECT s FROM Succursale s WHERE s.directeur = :directeur")})
 public class Succursale implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "uid")
-    @GeneratedValue(generator = "UUID")
-    private String uid;
-
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -63,6 +55,18 @@ public class Succursale implements Serializable {
     @Size(max = 255)
     @Column(name = "directeur")
     private String directeur;
+    @OneToMany(mappedBy = "idSucursale")
+    private List<User> userCollection;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "uid")
+    @GeneratedValue(generator = "UUID")
+    private String uid;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sucursaleId")
     private List<Comptefin> comptefinList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "succursalleId")
@@ -102,21 +106,6 @@ public class Succursale implements Serializable {
         this.nomSuccursale = nomSuccursale;
     }
 
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
-    public String getDirecteur() {
-        return directeur;
-    }
-
-    public void setDirecteur(String directeur) {
-        this.directeur = directeur;
-    }
 
     @JsonbTransient
     public List<Comptefin> getComptefinList() {
@@ -159,6 +148,31 @@ public class Succursale implements Serializable {
     @Override
     public String toString() {
         return "entities.Succursale[ uid=" + uid + " ]";
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getDirecteur() {
+        return directeur;
+    }
+
+    public void setDirecteur(String directeur) {
+        this.directeur = directeur;
+    }
+
+    @JsonbTransient
+    public List<User> getUserCollection() {
+        return userCollection;
+    }
+
+    public void setUserCollection(List<User> userCollection) {
+        this.userCollection = userCollection;
     }
 
 }

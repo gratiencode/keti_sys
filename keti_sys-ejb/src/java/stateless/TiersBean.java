@@ -60,7 +60,16 @@ public class TiersBean {
     public List<Tiers> findTiersBy(String nom,String prenom) {
         try {
             Query q=em.createNamedQuery("Tiers.findByNomPrenom")
-                    .setParameter("nom",nom).setParameter("prenom", prenom);
+                    .setParameter("nom",nom+"%").setParameter("prenom", prenom+"%");
+            return q.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    
+     public List<Tiers> findTiers() {
+        try {
+            Query q=em.createNamedQuery("Tiers.findAll");
             return q.getResultList();
         } catch (NoResultException e) {
             return null;

@@ -47,10 +47,19 @@ public class MarchandiseBean {
         }
     }
 
-    public List<Marchandise> findMarchandiseByPhone(String m) {
+    public List<Marchandise> findMarchandiseByName(String m) {
         try {
             Query q=em.createNamedQuery("Marchandise.findByNomMarchandise")
                     .setParameter("nomMarchandise",m);
+            return q.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    
+    public List<Marchandise> findMarchandises() {
+        try {
+            Query q=em.createNamedQuery("Marchandise.findAll");
             return q.getResultList();
         } catch (NoResultException e) {
             return null;

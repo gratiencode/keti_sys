@@ -15,6 +15,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -73,18 +75,18 @@ public class User implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "nom")
     private String nom;
-    @Size(max = 255)
-    @Column(name = "id_sucursale")
-    private String idSucursale;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "role")
     private String role;
     @Basic(optional = false)
-    @NotNull()
+    @NotNull
     @Column(name = "actif")
     private boolean actif;
+    @JoinColumn(name = "id_sucursale", referencedColumnName = "uid")
+    @ManyToOne
+    private Succursale idSucursale;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -136,14 +138,6 @@ public class User implements Serializable {
     }
 
 
-    public String getIdSucursale() {
-        return idSucursale;
-    }
-
-    public void setIdSucursale(String idSucursale) {
-        this.idSucursale = idSucursale;
-    }
-
 
     @JsonbTransient
     public List<Session> getSessionList() {
@@ -180,8 +174,7 @@ public class User implements Serializable {
     }
 
    
-
-    
+ 
 
     public String getUsername() {
         return username;
@@ -190,8 +183,6 @@ public class User implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-
- 
 
     public String getPassword() {
         return password;
@@ -209,6 +200,8 @@ public class User implements Serializable {
         this.prenom = prenom;
     }
 
+   
+
     public String getNom() {
         return nom;
     }
@@ -216,8 +209,6 @@ public class User implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
-
-   
 
     public String getRole() {
         return role;
@@ -233,6 +224,14 @@ public class User implements Serializable {
 
     public void setActif(boolean actif) {
         this.actif = actif;
+    }
+
+    public Succursale getIdSucursale() {
+        return idSucursale;
+    }
+
+    public void setIdSucursale(Succursale idSucursale) {
+        this.idSucursale = idSucursale;
     }
     
 }

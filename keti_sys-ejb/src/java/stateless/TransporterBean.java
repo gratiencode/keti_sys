@@ -59,6 +59,17 @@ public class TransporterBean {
         }
     }
        
+    public List<Transporter> findTransporterByTracking(int track) {
+        try {
+            Query q=em.createNamedQuery("Transporter.findByTracking")
+                    .setParameter("tracking",track);
+            return q.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    
+    
     public List<Transporter> findTransporters() {
         try {
             Query q=em.createNamedQuery("Transporter.findAll");

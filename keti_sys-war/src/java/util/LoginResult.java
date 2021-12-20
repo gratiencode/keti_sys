@@ -5,6 +5,7 @@
  */
 package util;
 
+import entities.Succursale;
 import java.util.Objects;
 
 /**
@@ -14,6 +15,7 @@ import java.util.Objects;
 public class LoginResult {
     private String role;
     private Token token;
+    private Succursale succursale;
 
     public LoginResult() {
     }
@@ -62,6 +64,14 @@ public class LoginResult {
             return false;
         }
         return true;
+    }
+
+    public Succursale getSuccursale() {
+        return succursale;
+    }
+
+    public void setSuccursale(Succursale succursale) {
+        this.succursale = succursale;
     }
     
     

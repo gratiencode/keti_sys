@@ -12,7 +12,7 @@ import javax.ws.rs.core.Application;
  *
  * @author eroot
  */
-@javax.ws.rs.ApplicationPath("webresources")
+@javax.ws.rs.ApplicationPath("v1")
 public class ApplicationConfig extends Application {
 
     @Override
@@ -33,15 +33,23 @@ public class ApplicationConfig extends Application {
         resources.add(jaxrs.AuthsResource.class);
         resources.add(jaxrs.ClientResource.class);
         resources.add(jaxrs.ClientsResource.class);
+        resources.add(jaxrs.ContactResource.class);
+        resources.add(jaxrs.ContactsResource.class);
         resources.add(jaxrs.CorsFilter.class);
+        resources.add(jaxrs.MarchandiseResource.class);
+        resources.add(jaxrs.MarchandisesResource.class);
         resources.add(jaxrs.NotifyResource.class);
         resources.add(jaxrs.RequestInterceptorFilter.class);
         resources.add(jaxrs.SuccursalResource.class);
         resources.add(jaxrs.SuccursalsResource.class);
+        resources.add(jaxrs.TransportResource.class);
+        resources.add(jaxrs.TransportsResource.class);
         resources.add(jaxrs.UserResource.class);
         resources.add(jaxrs.UsersResource.class);
         resources.add(jaxrs.VehiculeResource.class);
         resources.add(jaxrs.VehiculesResource.class);
+        resources.add(jaxrs.VoyageResource.class);
+        resources.add(jaxrs.VoyagesResource.class);
     }
     
 }

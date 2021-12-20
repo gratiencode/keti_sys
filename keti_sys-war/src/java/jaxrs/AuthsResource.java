@@ -34,6 +34,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import stateless.SessionBean;
+import stateless.SuccursaleBean;
 import stateless.UserBean;
 import util.Credentials;
 import util.LoginResult;
@@ -128,7 +129,9 @@ public class AuthsResource {
             String token = this.genToken(u.getUid());
             Token tkn=new Token();
             tkn.setToken(token);
-            return Response.ok(new LoginResult(u.getRole(), tkn)).build();
+            LoginResult rst=new LoginResult(u.getRole(), tkn);
+            rst.setSuccursale(u.getIdSucursale()); 
+            return Response.ok(rst).build();
         } catch (GeneralSecurityException ex) {
             Logger.getLogger(AuthsResource.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

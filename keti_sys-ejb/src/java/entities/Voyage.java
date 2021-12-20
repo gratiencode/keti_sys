@@ -5,6 +5,8 @@
  */
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -52,6 +54,10 @@ public class Voyage implements Serializable {
     @NotNull
     @Column(name = "date_arriver")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(
+        shape = Shape.STRING,
+        pattern = "yyyy-MM-dd'T'HH:mm:ss"
+    )
     private Date dateArriver;
     @Basic(optional = false)
     @NotNull
